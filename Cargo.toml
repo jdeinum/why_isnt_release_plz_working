@@ -1,6 +1,12 @@
 [package]
 name = "test_release_plz"
 version = "0.1.0"
+repository = "https://github.com/jdeinum/why_isnt_release_plz_working"
 edition = "2024"
 
 [dependencies]
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
