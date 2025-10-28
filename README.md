@@ -38,3 +38,38 @@ Caused by:
 2025-10-28T22:06:56.072544Z  INFO published test_release_plz 0.1.0
 release_output: {"releases":[{"package_name":"test_release_plz","prs":[],"tag":"v0.1.0","version":"0.1.0"}]}
 ```
+
+### Fix missing changelog
+
+```
+touch CHANGELOG.md
+
+git add .
+
+git commit -m "docs: added changelog"
+
+git push
+```
+
+Which results in the folloing output:
+
+```
+ 2025-10-28T22:12:16.690002Z  INFO using release-plz config file release-plz.toml
+2025-10-28T22:12:16.706137Z  INFO downloading packages from cargo registry crates.io
+    Updating crates.io index
+2025-10-28T22:12:16.837128Z  WARN Package `test_release_plz@*.*.*` not found
+2025-10-28T22:12:16.849696Z  INFO determining next version for test_release_plz 0.1.0
+2025-10-28T22:12:17.731590Z  INFO test_release_plz: next version is 0.1.0
+2025-10-28T22:12:21.046276Z  INFO updated pr https://github.com/jdeinum/why_isnt_release_plz_working/pull/1
+release_pr_output: {"prs":[{"base_branch":"master","head_branch":"release-plz-2025-10-28T22-06-14Z","html_url":"https://github.com/jdeinum/why_isnt_release_plz_working/pull/1","number":1,"releases":[{"package_name":"test_release_plz","version":"0.1.0"}]}]}
+-- Running release-plz release --
+2025-10-28T22:12:21.121189Z  INFO using release-plz config file release-plz.toml
+2025-10-28T22:12:21.490470Z  INFO test_release_plz 0.1.0: Already published - Tag v0.1.0 already exists
+release_output: {"releases":[]}
+```
+
+But whats interesting is it seems like release-plz is handling the deployment
+instead of just creating the tag despite `git_release_enable = false` being set.
+Maybe a file is named incorrectly?
+
+Here is the deployment info:
