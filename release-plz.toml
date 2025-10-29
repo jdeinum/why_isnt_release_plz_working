@@ -14,7 +14,9 @@ git_tag_enable = true
 # disable GitHub releases
 git_release_enable = false
 
-git_tag_name = "{{ package }}-v{{ version }}-shouldnt-be-built"
+git_tag_name = "{{ package }}-v{{ version }}-tag"
+
+git_release_name = "{{ package }}-v{{ version }}-package"
 
 # labels for the release PR
 pr_labels = ["release"]
