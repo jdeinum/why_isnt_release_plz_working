@@ -10,11 +10,16 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    types:
+      - closed
 
 jobs:
   release-plz-release:
     name: Release-plz release
     runs-on: ubuntu-latest
+    # Only run when a PR with the 'release' label is merged to create the tag
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
     # Used to push tags, and create releases.
     permissions:
       contents: write
@@ -47,6 +52,8 @@ jobs:
   release-plz-pr:
     name: Release-plz PR
     runs-on: ubuntu-latest
+    # Only run on regular pushes, not when PRs are merged
+    if: github.event_name == 'push'
     permissions:
       # Used to create and update pull requests.
       pull-requests: write
