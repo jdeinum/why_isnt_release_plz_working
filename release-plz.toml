@@ -25,3 +25,6 @@ publish_allow_dirty = false
 
 # disable running `cargo-semver-checks`
 semver_check = false
+
+# no push to cargo registry 
+publish = false
