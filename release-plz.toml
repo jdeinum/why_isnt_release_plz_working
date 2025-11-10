@@ -28,3 +28,9 @@ semver_check = false
 
 # no push to cargo registry
 publish = false
+
+# use git only mode 
+git_only = true
+
+# the regex we use to determine a release from git tags
+git_only_release_regex = "not even a regex"
